@@ -66,8 +66,8 @@ python val.py --config configs/fastfcn_ade20k_520x520_120k.yml --model_path {you
 ### 第四步：test_tipc
 output目录下包含已经训练好的模型参数以及对应的日志文件。
 ```bash
-bash test_tipc/prepare.sh ./test_tipc/configs/encnet_small/train_infer_python.txt 'lite_train_infer'
-bash test_tipc/test_train_inference_python.sh ./test_tipc/configs/encnet_small/train_infer_python.txt 'lite_train_infer'
+bash test_tipc/prepare.sh ./test_tipc/configs/fastfcn_small/train_infer_python.txt 'lite_train_infer'
+bash test_tipc/test_train_inference_python.sh ./test_tipc/fastfcn_small/encnet_small/train_infer_python.txt 'lite_train_infer'
 ```
 
 ## 5 代码结构与说明
