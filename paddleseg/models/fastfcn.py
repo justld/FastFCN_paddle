@@ -140,8 +140,7 @@ class Encoding(nn.Layer):
             default_initializer=nn.initializer.Uniform(-1, 0),
         )
 
-    @staticmethod
-    def scaled_l2(x, codewords, scale):
+    def scaled_l2(self, x, codewords, scale):
         num_codes, channels = paddle.shape(codewords)
         batch_size = paddle.shape(x)
         reshaped_scale = scale.reshape([1, 1, num_codes])
@@ -152,8 +151,7 @@ class Encoding(nn.Layer):
         scaled_l2_norm = reshaped_scale * (expanded_x - reshaped_codewords).pow(2).sum(axis=3)
         return scaled_l2_norm
 
-    @staticmethod
-    def aggregate(assignment_weights, x, codewords):
+    def aggregate(self, assignment_weights, x, codewords):
         num_codes, channels = paddle.shape(codewords)
         reshaped_codewords = codewords.reshape([1, 1, num_codes, channels])
         batch_size = paddle.shape(x)[0]
@@ -169,7 +167,7 @@ class Encoding(nn.Layer):
         assert x_dims == 4, "The dimension of input tensor must equal 4, but got {}.".format(x_dims)
         assert paddle.shape(x)[1] == self.channels, "Encoding channels error, excepted {} but got {}.".format(self.channels, paddle.shape(x)[1])
 
-        batch_size = paddle.shape(x)
+        batch_size = paddle.shape(x)[0]
         x = x.reshape([batch_size, self.channels, -1]).transpose([0, 2, 1])
         assignment_weights = F.softmax(self.scaled_l2(x, self.codewords, self.scale), axis=2)
 
