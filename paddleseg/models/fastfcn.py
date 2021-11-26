@@ -95,7 +95,7 @@ class FastFCN(nn.Layer):
             utils.load_entire_model(self, self.pretrained)
 
     def forward(self, inputs):
-        imsize = inputs.shape[2:]
+        imsize = paddle.shape(inputs)[2:]
         feats = self.backbone(inputs)
         if self.jpu:
             feats = self.jpu_layer(*feats)
@@ -104,10 +104,9 @@ class FastFCN(nn.Layer):
 
         feat = self.bottleneck(feats[-1])
         if self.add_lateral:
-            laterals = [
-                F.interpolate(lateral_conv(feats[i]), size=feat.shape[2:], mode='bilinear', align_corners=False)
-                for i, lateral_conv in enumerate(self.lateral_convs)
-            ]
+            laterals = []
+            for i, lateral_conv in enumerate(self.lateral_convs):
+                laterals.append(F.interpolate(lateral_conv(feats[i]), size=paddle.shape(feat)[2:], mode='bilinear', align_corners=False))
             feat = self.fusion(paddle.concat([feat, *laterals], 1))
         encode_feat, feat = self.enc_module(feat)
         out = self.cls_seg(feat)
@@ -172,6 +171,7 @@ class Encoding(nn.Layer):
         assignment_weights = F.softmax(self.scaled_l2(x, self.codewords, self.scale), axis=2)
 
         encoded_feat = self.aggregate(assignment_weights, x, self.codewords)
+        encoded_feat = encoded_feat.reshape([batch_size, self.num_codes, -1])
         return encoded_feat
 
 class EncModule(nn.Layer):
@@ -200,18 +200,3 @@ class EncModule(nn.Layer):
         y = gamma.reshape([batch_size, channels, 1, 1])
         output = F.relu(x + x * y)
         return encoding_feat, output
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
