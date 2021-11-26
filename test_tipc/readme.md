@@ -16,9 +16,9 @@
 ```shell
 test_tipc/
 ├── configs/  # 配置文件目录
-    ├── encnet_small    
+    ├── fastfcn_small    
         ├── train_infer_python.txt      # 测试Linux上python训练预测（基础训练预测）的配置文件
-        ├── encnet_small_v1_humanseg_192x192_mini_supervisely.yml
+        ├── fastfcn_small_v1_humanseg_192x192_mini_supervisely.yml
 ├── results/   # 预测结果
 ├── prepare.sh                        # 完成test_*.sh运行所需要的数据和模型下载
 ├── test_train_inference_python.sh    # 测试python训练预测的主程序
@@ -48,10 +48,10 @@ bash test_tipc/test_train_inference_python.sh configs/[model_name]/[params_file_
 ```shell
 # 功能：准备数据
 # 格式：bash + 运行脚本 + 参数1: 配置文件选择 + 参数2: 模式选择
-bash test_tipc/prepare.sh ./test_tipc/configs/encnet_small/train_infer_python.txt 'lite_train_infer'
+bash test_tipc/prepare.sh ./test_tipc/configs/fastfcn_small/train_infer_python.txt 'lite_train_infer'
 
 # 功能：运行测试
 # 格式：bash + 运行脚本 + 参数1: 配置文件选择 + 参数2: 模式选择
-bash test_tipc/test_train_inference_python.sh ./test_tipc/configs/encnet_small/train_infer_python.txt 'lite_train_infer'
+bash test_tipc/test_train_inference_python.sh ./test_tipc/configs/fastfcn_small/train_infer_python.txt 'lite_train_infer'
 ```
 

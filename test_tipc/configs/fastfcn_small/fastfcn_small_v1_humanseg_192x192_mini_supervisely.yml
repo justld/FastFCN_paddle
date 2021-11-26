@@ -51,7 +51,7 @@ loss:
     - type: CrossEntropyLoss # output
     - type: CrossEntropyLoss # fcn out
     - type: SeCrossEntropyLoss # se out
-      num_classes: 150
+      num_classes: 2
   coef: [1, 0.4, 0.2]
 
 model:
