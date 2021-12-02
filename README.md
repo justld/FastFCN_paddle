@@ -16,7 +16,7 @@
 
 |NetWork |steps|opt|image_size|batch_size|dataset|memory|card|mIou|config|weight|log|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-|FastFCN|120K(只训练了不到90k)|SGD|1024x512|4|ADE20K|32G|4|42.8|[fastfcn_ade20k_520x520_120k.yml](configs/fastfcn_ade20k_520x520_120k.yml)|[weight](https://bj.bcebos.com/v1/ai-studio-cluster-infinite-task/outputs/105110.tar?authorization=bce-auth-v1%2F0ef6765c1e494918bc0d4c3ca3e5c6d1%2F2021-11-25T08%3A56%3A00Z%2F-1%2F%2F27d2bd5ec48e4e1a4463f7af2765071742a8ce9791fb3d4c0ddd013de854fa07) |[log](log/trainer-0.log)|
+|FastFCN|120K|SGD|1024x512|4|ADE20K|32G|4|43.37|[fastfcn_ade20k_520x520_120k.yml](configs/fastfcn_ade20k_520x520_120k.yml)|[weight](https://bj.bcebos.com/v1/ai-studio-cluster-infinite-task/outputs/106456.tar?authorization=bce-auth-v1%2F0ef6765c1e494918bc0d4c3ca3e5c6d1%2F2021-12-02T04%3A11%3A57Z%2F-1%2F%2F37b0f7d7baf9e1c2275bdb3ed615295a34b2761de918da626fb9962cb0330c6c) |[log](log/trainer-0.log)|
 
 ## 3 数据集
 [ADE20K dataset](http://groups.csail.mit.edu/vision/datasets/ADE20K/)
@@ -89,7 +89,7 @@ bash test_tipc/test_train_inference_python.sh ./test_tipc/fastfcn_small/train_in
 │  val.py                       
 ```
 **说明**
-1、本项目在Aistudio平台，使用Tesla V100 * 4 脚本任务训练120K 42.8%。  
+1、本项目在Aistudio平台，使用Tesla V100 * 4 脚本任务训练120K 43.37%。  
 2、本项目基于PaddleSeg开发。  
 
 ## 6 模型信息

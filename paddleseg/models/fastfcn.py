@@ -141,7 +141,7 @@ class Encoding(nn.Layer):
 
     def scaled_l2(self, x, codewords, scale):
         num_codes, channels = paddle.shape(codewords)
-        batch_size = paddle.shape(x)
+        batch_size = paddle.shape(x)[0]
         reshaped_scale = scale.reshape([1, 1, num_codes])
         # expanded_x = paddle.expand(x.unsqueeze(2), [batch_size, paddle.shape(x)[1], num_codes, channels])
         expanded_x = paddle.tile(x.unsqueeze(2), [1, 1, num_codes, 1])
